@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.productservice;
 
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.service.productservice.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Service;
  * Created by Nabeel on 9/24/2017.
  */
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public Iterable<Product> listAllProducts() { return this.productRepository.findAll(); }
+    public Iterable<Product> listAllProducts() {
+        return this.productRepository.findAll();
+    }
 
     @Override
     public Product getProductById(Long id) {
@@ -31,5 +34,7 @@ public class ProductServiceImpl implements ProductService{
     public void deleteProduct(Long id) {
         this.productRepository.delete(id);
     }
+
+    // find the best way to handle the error
 
 }

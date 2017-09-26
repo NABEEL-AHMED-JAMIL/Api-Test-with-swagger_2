@@ -17,17 +17,18 @@ public interface IProductController {
 
 
     @RequestMapping(value = LIST, method= RequestMethod.GET)
-    Iterable<Product> list(Model model);
+    Iterable<Product> list(Model model) throws Exception;
 
     @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET)
-    Product showProduct(@PathVariable Long id, Model model);
+    Product showProduct(@PathVariable Long id, Model model) throws Exception;
 
     @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST)
-    ResponseEntity saveProduct(@RequestBody Product product);
+    ResponseEntity saveProduct(@RequestBody Product product) throws Exception;
 
     @RequestMapping(value = UPDATE_PRODUCT, method = RequestMethod.PUT)
-    ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product);
+    ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) throws Exception;
 
     @RequestMapping(value= DELETE, method = RequestMethod.DELETE)
-    ResponseEntity delete(@PathVariable Long id);
+    ResponseEntity delete(@PathVariable Long id) throws Exception;
+
 }
