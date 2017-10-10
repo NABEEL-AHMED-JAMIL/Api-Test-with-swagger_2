@@ -14,4 +14,6 @@ public interface ProductService {
     void saveProduct(Product product);
 
     void deleteProduct(Long id);
+
+    // find the best way to handle the error
 }
