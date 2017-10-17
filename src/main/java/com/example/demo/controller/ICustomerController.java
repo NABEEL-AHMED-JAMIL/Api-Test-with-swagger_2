@@ -21,9 +21,8 @@ import static com.example.demo.util.RequestMapping.*;
 public interface ICustomerController {
 
     @ApiOperation(value = "Search with an Email", response = Customer.class)
-    @RequestMapping(value = FIND_BY_EMAIL, method= RequestMethod.GET)
+    @RequestMapping(value = FIND_BY_EMAIL, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     Customer findByEmail(String email);
-
 
     @ApiOperation(value = "View a list of available customer",response = Iterable.class)
     @ApiResponses(value = {
@@ -33,20 +32,22 @@ public interface ICustomerController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 500, message = "The Data not contain")
     })
-    @RequestMapping(value = CUSTOMER_LIST, method= RequestMethod.GET)
+    @RequestMapping(value = CUSTOMER_LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     Iterable<Customer> list(Model model) throws Exception;
 
 
     @ApiOperation(value = "New Customer Save")
-    @RequestMapping(value = SAVE_CUSTOMER, method = RequestMethod.POST)
+    @RequestMapping(value = SAVE_CUSTOMER, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
+            produces = {"application/json", "application/xml"})
     ResponseEntity saveCustomer(@RequestBody Customer customer) throws Exception;
 
     @ApiOperation(value = "Customer Update..... Detail")
-    @RequestMapping(value = UPDATE_CUSTOMER, method = RequestMethod.PUT)
+    @RequestMapping(value = UPDATE_CUSTOMER, method = RequestMethod.PUT, consumes = { "application/json", "application/xml"},
+            produces = {"application/json", "application/xml"})
     ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) throws Exception;
 
     @ApiOperation(value = "Customer Delete....")
-    @RequestMapping(value= DELETE_CUSTOMER, method = RequestMethod.DELETE)
+    @RequestMapping(value= DELETE_CUSTOMER, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     ResponseEntity deleteCustomer(@PathVariable Long id) throws Exception;
 
 }

@@ -29,23 +29,25 @@ public interface IProductController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 500, message = "The Data not contain")
     })
-    @RequestMapping(value = LIST, method= RequestMethod.GET)
+    @RequestMapping(value = LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     Iterable<Product> list(Model model) throws Exception;
 
     @ApiOperation(value = "Search a product with an ID",response = Product.class)
-    @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET)
+    @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     Product showProduct(@PathVariable Long id, Model model) throws Exception;
 
     @ApiOperation(value = "Add a product")
-    @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST)
+    @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
+            produces = {"application/json", "application/xml"})
     ResponseEntity saveProduct(@RequestBody Product product) throws Exception;
 
     @ApiOperation(value = "Update a product")
-    @RequestMapping(value = UPDATE_PRODUCT, method = RequestMethod.PUT)
+    @RequestMapping(value = UPDATE_PRODUCT, method = RequestMethod.PUT, consumes = {"application/json", "application/xml"},
+            produces = {"application/json", "application/xml"})
     ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) throws Exception;
 
     @ApiOperation(value = "Delete a product")
-    @RequestMapping(value= DELETE, method = RequestMethod.DELETE)
+    @RequestMapping(value= DELETE, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     ResponseEntity delete(@PathVariable Long id) throws Exception;
 
 }
