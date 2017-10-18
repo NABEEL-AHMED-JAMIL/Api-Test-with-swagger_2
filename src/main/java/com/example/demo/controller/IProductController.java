@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import springfox.documentation.schema.Model;
 
 import static com.example.demo.util.RequestMapping.*;
 
@@ -18,7 +19,7 @@ import static com.example.demo.util.RequestMapping.*;
  * Created by Nabeel on 9/24/2017.
  */
 @Api(value="onlinestore", description="Operations pertaining to products in Online Store")
-public interface IProductController {
+public interface IProductController extends AbstractRestHandler{
 
 
     @ApiOperation(value = "View a list of available products",response = Iterable.class)
@@ -30,24 +31,24 @@ public interface IProductController {
             @ApiResponse(code = 500, message = "The Data not contain")
     })
     @RequestMapping(value = LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    Iterable<Product> list(Model model) throws Exception;
+    Iterable<Product> list(Model model);
 
     @ApiOperation(value = "Search a product with an ID",response = Product.class)
     @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    Product showProduct(@PathVariable Long id, Model model) throws Exception;
+    Product showProduct(@PathVariable Long id, Model model);
 
     @ApiOperation(value = "Add a product")
     @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    ResponseEntity saveProduct(@RequestBody Product product) throws Exception;
+    ResponseEntity saveProduct(@RequestBody Product product);
 
     @ApiOperation(value = "Update a product")
     @RequestMapping(value = UPDATE_PRODUCT, method = RequestMethod.PUT, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) throws Exception;
+    ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product);
 
     @ApiOperation(value = "Delete a product")
     @RequestMapping(value= DELETE, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
-    ResponseEntity delete(@PathVariable Long id) throws Exception;
+    ResponseEntity delete(@PathVariable Long id);
 
 }

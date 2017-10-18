@@ -63,7 +63,9 @@
 		<dependency>
 			<groupId>com.googlecode.jcsv</groupId>
 			<artifactId>jcsv</artifactId>
+			<version>1.4.0</version>
 		</dependency>
+
 		<!-- unit testing-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

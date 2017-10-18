@@ -18,7 +18,7 @@ import static com.example.demo.util.RequestMapping.*;
  * Created by Nabeel on 9/26/2017.
  */
 @Api(value="customer", description="Customer Operation handling")
-public interface ICustomerController {
+public interface ICustomerController extends AbstractRestHandler{
 
     @ApiOperation(value = "Search with an Email", response = Customer.class)
     @RequestMapping(value = FIND_BY_EMAIL, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
@@ -33,21 +33,21 @@ public interface ICustomerController {
             @ApiResponse(code = 500, message = "The Data not contain")
     })
     @RequestMapping(value = CUSTOMER_LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    Iterable<Customer> list(Model model) throws Exception;
+    Iterable<Customer> list(Model model);
 
 
     @ApiOperation(value = "New Customer Save")
     @RequestMapping(value = SAVE_CUSTOMER, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    ResponseEntity saveCustomer(@RequestBody Customer customer) throws Exception;
+    ResponseEntity saveCustomer(@RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Update..... Detail")
     @RequestMapping(value = UPDATE_CUSTOMER, method = RequestMethod.PUT, consumes = { "application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) throws Exception;
+    ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Delete....")
     @RequestMapping(value= DELETE_CUSTOMER, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
-    ResponseEntity deleteCustomer(@PathVariable Long id) throws Exception;
+    ResponseEntity deleteCustomer(@PathVariable Long id);
 
 }
