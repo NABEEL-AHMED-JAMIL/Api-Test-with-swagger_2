@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.productcontroller;
 
 import com.example.demo.model.Product;
 import io.swagger.annotations.Api;
@@ -6,12 +6,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.models.Model;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import springfox.documentation.schema.Model;
+
 
 import static com.example.demo.util.RequestMapping.*;
 
@@ -19,7 +21,7 @@ import static com.example.demo.util.RequestMapping.*;
  * Created by Nabeel on 9/24/2017.
  */
 @Api(value="onlinestore", description="Operations pertaining to products in Online Store")
-public interface IProductController extends AbstractRestHandler{
+public interface IProductController {
 
 
     @ApiOperation(value = "View a list of available products",response = Iterable.class)
@@ -30,10 +32,12 @@ public interface IProductController extends AbstractRestHandler{
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
             @ApiResponse(code = 500, message = "The Data not contain")
     })
+    @Cacheable("products")
     @RequestMapping(value = LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    Iterable<Product> list(Model model);
+    Iterable<Product> list(io.swagger.models.Model model);
 
     @ApiOperation(value = "Search a product with an ID",response = Product.class)
+    @Cacheable(value = "products", key = "#id")
     @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     Product showProduct(@PathVariable Long id, Model model);
 
@@ -48,6 +52,7 @@ public interface IProductController extends AbstractRestHandler{
     ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product);
 
     @ApiOperation(value = "Delete a product")
+    @CacheEvict(value = "products", key = "#id")
     @RequestMapping(value= DELETE, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     ResponseEntity delete(@PathVariable Long id);
 

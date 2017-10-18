@@ -18,6 +18,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer findByEmail(String email) throws EntityNotFoundException {
+        // replace this by log
+        System.out.println("Retrieving from Database");
         this.customer= customerRepository.findByEmail(email);
         if(this.customer.equals(null)){
 //            throw new EntityNotFoundException(Customer.class, "email", email);
@@ -27,6 +29,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Iterable<Customer> listAllCustomers() {
+        System.out.println("Retrieving from Database");
         return null;
     }
 

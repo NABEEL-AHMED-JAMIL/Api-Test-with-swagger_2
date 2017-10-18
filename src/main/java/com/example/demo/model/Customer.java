@@ -14,6 +14,7 @@ import java.util.Date;
 // generate the "get/set has-code,equal also the constructor of arg..."
 @Entity
 @Table(name = "customer")
+//implements Serializable
 public class Customer {
 
     private final int MIN_RANGE = 8;

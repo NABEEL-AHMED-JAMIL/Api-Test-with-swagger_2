@@ -26,6 +26,17 @@
 
 	<dependencies>
 
+		<!-- eh-cache-->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<!-- cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 		<!-- rest api -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,6 +54,7 @@
 			<version>2.6.1</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- swagger url-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>

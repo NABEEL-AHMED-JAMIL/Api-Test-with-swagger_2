@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by Nabeel on 10/17/2017.
  */
-@Configuration
 public class FileFetchService {
 
     private static FileFetchService fileFetchService;
@@ -36,7 +35,5 @@ public class FileFetchService {
 
         return null;
     }
-
-
 
 }

@@ -1,5 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.controller.customercontroller;
 
+import com.example.demo.controller.AbstractRestHandler;
 import com.example.demo.model.Customer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -14,11 +15,11 @@ import static com.example.demo.util.RequestMapping.CUSTOMER;
  */
 @RestController
 @RequestMapping(CUSTOMER)
-public class CustomerController implements ICustomerController{
+public class CustomerController extends AbstractRestHandler implements ICustomerController {
 
 
     @Override
-    public Iterable<Customer> list(Model model) throws Exception {
+    public Iterable<Customer> list(Model model) {
         return null;
     }
 
@@ -29,19 +30,19 @@ public class CustomerController implements ICustomerController{
 
 
     @Override
-    public ResponseEntity saveCustomer(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity saveCustomer(@RequestBody Customer customer) {
         return null;
     }
 
 
     @Override
-    public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) throws Exception {
+    public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
         return null;
     }
 
 
     @Override
-    public ResponseEntity deleteCustomer(@PathVariable Long id) throws Exception {
+    public ResponseEntity deleteCustomer(@PathVariable Long id) {
         return null;
     }
 }

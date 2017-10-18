@@ -1,5 +1,7 @@
-package com.example.demo.controller;
+package com.example.demo.controller.productcontroller;
 
+import com.example.demo.controller.AbstractRestHandler;
+import com.example.demo.controller.productcontroller.IProductController;
 import com.example.demo.model.Product;
 import com.example.demo.service.productservice.ProductService;
 import io.swagger.models.Model;
@@ -14,32 +16,32 @@ import static com.example.demo.util.RequestMapping.PRODUCT;
  */
 @RestController
 @RequestMapping(PRODUCT)
-public class ProductController implements IProductController{
+public class ProductController extends AbstractRestHandler implements IProductController {
 
     @Autowired
     private ProductService productService;
 
     @Override
-    public Iterable<Product> list(Model model) throws Exception {
+    public Iterable<Product> list(Model model) {
         Iterable productList = productService.listAllProducts();
         return productList;
     }
 
     @Override
-    public Product showProduct(@PathVariable Long id, Model model) throws Exception {
+    public Product showProduct(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
         return product;
     }
 
     @Override
-    public ResponseEntity saveProduct(@RequestBody Product product) throws Exception {
+    public ResponseEntity saveProduct(@RequestBody Product product) {
         productService.saveProduct(product);
         return new ResponseEntity("Product saved successfully", HttpStatus.OK);
     }
 
 
     @Override
-    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) throws Exception {
+    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) {
         Product storedProduct = productService.getProductById(id);
         storedProduct.setDescription(product.getDescription());
         storedProduct.setImageUrl(product.getImageUrl());
@@ -50,7 +52,7 @@ public class ProductController implements IProductController{
 
 
     @Override
-    public ResponseEntity delete(@PathVariable Long id) throws Exception {
+    public ResponseEntity delete(@PathVariable Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity("Product deleted successfully", HttpStatus.OK);
     }

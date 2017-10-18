@@ -1,6 +1,8 @@
 package com.example.demo.service.productservice;
 
 import com.example.demo.model.Product;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * Created by Nabeel on 9/24/2017.
@@ -15,5 +17,4 @@ public interface ProductService {
 
     void deleteProduct(Long id);
 
-    // find the best way to handle the error
 }

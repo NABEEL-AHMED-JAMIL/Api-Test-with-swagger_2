@@ -10,6 +10,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "product")
+//implements Serializable
 public class Product {
 
     @Id
