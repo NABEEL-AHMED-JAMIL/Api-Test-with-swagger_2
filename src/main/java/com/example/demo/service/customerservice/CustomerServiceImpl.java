@@ -42,4 +42,9 @@ public class CustomerServiceImpl implements CustomerService{
     public void deleteCustomer(Long id) {
 
     }
+
+    @Override
+    public Customer findByUsername(String username) {
+        return null;
+    }
 }

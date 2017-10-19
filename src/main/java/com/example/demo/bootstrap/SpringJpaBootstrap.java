@@ -1,5 +1,6 @@
 package com.example.demo.bootstrap;
 
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 import org.apache.log4j.Logger;
@@ -45,5 +46,6 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         productRepository.save(mug);
 
         log.info("Saved Mug - id:" + mug.getId());
+
     }
 }

@@ -23,6 +23,7 @@ public class ProductController extends AbstractRestHandler implements IProductCo
 
     @Override
     public Iterable<Product> list(Model model) {
+        System.out.println("LIST OF USER FROM THE DATABASE");
         Iterable productList = productService.listAllProducts();
         return productList;
     }

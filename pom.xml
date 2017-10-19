@@ -66,10 +66,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+		<!-- jwt token-->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.6.0</version>
+		</dependency>
 		<!-- database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<!--mysql-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- csv file rider -->
 		<dependency>
@@ -77,28 +89,55 @@
 			<artifactId>jcsv</artifactId>
 			<version>1.4.0</version>
 		</dependency>
-
+		<!-- web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- mobile support -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mobile</artifactId>
+		</dependency>
+		<!-- time formate  -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- data-bind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!---->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
 		<!-- unit testing-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!--CODE-->
-		<!--<dependency>-->
-		<!--<groupId>org.projectlombok</groupId>-->
-		<!--<artifactId>lombok</artifactId>-->
-		<!--<scope>provided</scope>-->
-		<!--</dependency>-->
-
-	</dependencies>
+		<!-- security-test -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<jvmArguments>
+						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+					</jvmArguments>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
