@@ -1,7 +1,6 @@
 package com.example.demo.controller.productcontroller;
 
 import com.example.demo.controller.AbstractRestHandler;
-import com.example.demo.controller.productcontroller.IProductController;
 import com.example.demo.model.Product;
 import com.example.demo.service.productservice.ProductService;
 import io.swagger.models.Model;
@@ -22,27 +21,26 @@ public class ProductController extends AbstractRestHandler implements IProductCo
     private ProductService productService;
 
     @Override
-    public Iterable<Product> list(Model model) {
-        System.out.println("LIST OF USER FROM THE DATABASE");
+    public ResponseEntity<Iterable<Product>> list(Model model) {
         Iterable productList = productService.listAllProducts();
-        return productList;
+        return new ResponseEntity(productList, HttpStatus.OK);
     }
 
     @Override
-    public Product showProduct(@PathVariable Long id, Model model) {
+    public ResponseEntity<Product> showProduct(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
-        return product;
+        return new ResponseEntity(product, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity saveProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
         productService.saveProduct(product);
         return new ResponseEntity("Product saved successfully", HttpStatus.OK);
     }
 
 
     @Override
-    public ResponseEntity updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         Product storedProduct = productService.getProductById(id);
         storedProduct.setDescription(product.getDescription());
         storedProduct.setImageUrl(product.getImageUrl());
@@ -53,7 +51,7 @@ public class ProductController extends AbstractRestHandler implements IProductCo
 
 
     @Override
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity("Product deleted successfully", HttpStatus.OK);
     }

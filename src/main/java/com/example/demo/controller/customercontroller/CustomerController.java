@@ -2,6 +2,9 @@ package com.example.demo.controller.customercontroller;
 
 import com.example.demo.controller.AbstractRestHandler;
 import com.example.demo.model.Customer;
+import com.example.demo.service.customerservice.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,32 +20,36 @@ import static com.example.demo.util.RequestMapping.CUSTOMER;
 @RequestMapping(CUSTOMER)
 public class CustomerController extends AbstractRestHandler implements ICustomerController {
 
+    @Autowired
+    private CustomerService customerService;
 
     @Override
-    public Iterable<Customer> list(Model model) {
-        return null;
+    public ResponseEntity<Iterable<Customer>> list(Model model) {
+        return new ResponseEntity(this.customerService.listAllCustomers(), HttpStatus.OK);
     }
 
     @Override
-    public Customer findByEmail(String email) {
-        return null;
-    }
-
-
-    @Override
-    public ResponseEntity saveCustomer(@RequestBody Customer customer) {
-        return null;
+    public ResponseEntity<Customer> findByEmail(@PathVariable String email) {
+        System.out.println("email:" + email);
+        return new ResponseEntity(this.customerService.findByEmail(email), HttpStatus.OK);
     }
 
 
     @Override
-    public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
-        return null;
+    public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) {
+        return new ResponseEntity(this.customerService.saveCustomer(customer), HttpStatus.OK);
     }
 
 
     @Override
-    public ResponseEntity deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        // issue method
+        return new ResponseEntity(this.customerService.saveCustomer(customer), HttpStatus.OK);
+    }
+
+
+    @Override
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
         return null;
     }
 }

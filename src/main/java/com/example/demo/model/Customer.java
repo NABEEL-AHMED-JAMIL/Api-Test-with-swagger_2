@@ -17,10 +17,8 @@ import java.util.List;
 /**
  * Created by Nabeel on 9/26/2017.
  */
-// generate the "get/set has-code,equal also the constructor of arg..."
 @Entity
 @Table(name = "customer")
-//implements Serializable
 public class Customer implements UserDetails {
 
     @Transient
@@ -93,10 +91,11 @@ public class Customer implements UserDetails {
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
+    @JsonIgnore
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-   // @JsonIgnore
+    @JsonIgnore
     @Override
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }

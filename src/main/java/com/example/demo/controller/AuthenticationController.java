@@ -6,8 +6,8 @@ import com.example.demo.model.CustomerTokenState;
 import com.example.demo.security.TokenHelper;
 import com.example.demo.security.auth.JwtAuthenticationRequest;
 import com.example.demo.util.common.DeviceProvider;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +32,7 @@ import java.security.Principal;
  */
 @RestController
 @RequestMapping( value = "/auth", produces = {"application/json", "application/xml"} )
+@Api(value="auth", description="Customer Authentication Controller")
 public class AuthenticationController {
 
     @Autowired

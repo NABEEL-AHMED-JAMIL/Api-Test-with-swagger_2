@@ -2,6 +2,7 @@ package com.example.demo.service.customerservice;
 
 import com.example.demo.model.Customer;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,10 +19,13 @@ public interface CustomerService {
 
     Iterable<Customer> listAllCustomers();
 
-    void saveCustomer(Customer customer);
+    Customer saveCustomer(Customer customer);
 
     void deleteCustomer(Long id);
 
     Customer findByUsername( String username );
+
+    void evictCache();
+
 
 }

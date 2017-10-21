@@ -72,11 +72,6 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.6.0</version>
 		</dependency>
-		<!-- database -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
 		<!--mysql-->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -126,6 +121,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.google.apis</groupId>-->
+			<!--<artifactId>google-api-services-drive</artifactId>-->
+			<!--<version>v3-rev87-1.23.0</version>-->
+		<!--</dependency>-->
     </dependencies>
 
 	<build>

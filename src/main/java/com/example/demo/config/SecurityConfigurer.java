@@ -59,8 +59,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
-                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and()
-                .authorizeRequests().antMatchers("/","/swagger-resources").permitAll()
+                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and().authorizeRequests().
+                antMatchers( HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css",
+                "/**/*.js").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, userDetailsService), BasicAuthenticationFilter.class)
@@ -68,8 +69,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                 .logoutSuccessHandler(logoutSuccess)
                 .deleteCookies(TOKEN_COOKIE);
-
-        http.headers().frameOptions().disable();
         // disable csrf for the login request
         http
                 .csrf()
@@ -85,7 +84,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 "/auth/login"
         );
-
     }
 
 }
