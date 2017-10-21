@@ -1,0 +1,420 @@
+								SQL WITH JDBC
+<====================================================================================================================================================================>
+Object-Relational Mapping (ORM) is a programming technique for converting data between relational databases and object oriented programming languages such as Java
+JDBC:-   JDBC API is a Java API that can access any kind of tabular data, especially data stored in a Relational Database.
+JDBC stands for Java Database Connectivity. Well we first introduce the JDBC Connectin.
+We first get the Driver for JDBC Connector from the tomcat. 
+After Donwload the Driver extrac the file then add the "Jar" file into the Project Folder Lib. That's it, So now We Move to the MYSQL.
+Four Step to Access the DATABASE
+   1:- Making a connection to a database
+   2:- Creating SQL or MySQL statements
+   3:- Executing that SQL or MySQL queries in the database
+   4:- Viewing & Modifying the resulting records
+
+SQL:- Sql is Strandard Langulage for Storing, Manipulationg(Breaking the record) and Retrived the Data from the database.
+Every table is broken up into smaller entities called fields. The fields in the Customers table consist of CustomerID, CustomerName, ContactName, Address, City, 
+PostalCode and Country.
+A field is a column in a table that is designed to maintain specific information about every record in the table.
+A record, also called a row, is each individual entry that exists in a table.
+For example, there are 91 records in the above Customers table.
+A record is a horizontal entity in a table. A column is a vertical entity in a table that contains all information associated with a specific field in a table.
+Q:- What is SQL Statements?
+Ans:- Most of the actions you need to perform on a database are done with SQL statements.
+Q:- What is SELECT Statements?
+Ans:- SELECT statement is used to select data from a database resultend data retrived as tabular form
+          Example of the "SELECT" Statement.
+                 Select * from Cuntoury; (Which is retrive the whole dat from the data base)
+                 Select id, countouryName, ZinpCode from Countoury (This will retrive the Manipulation data(few data as the requirement))
+     Q:- What is SELECT DISTINCT Statements?
+     Ans:- The SELECT DISTINCT statement is used to return only distinct (different) values.  Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+     The SELECT DISTINCT statement is used to return only distinct (different) values.
+          Example of the "SELECT DISTINCT" Statement.
+                 Select Distinct * from Cuntoury; (Which is retrive the whole dat from the data base which have not dublicate value)
+                 Select Distinct id, countouryName, ZinpCode from Countoury (This will retrive the Manipulation data(few data as the requirement) but not dublicate date only retrive unique data)
+          Here is an other example which help us understand the "Select Distinct"
+                 Select count(Distinct countryName) from Countoury;
+                 Select count(*) as COUntryName from (select distinct countryName from Countoury); (where "AS" key word is used to discribe the name of the colume).
+     Q:- How we filter the Record from database what Query we used for Filtering process?
+     Ans:- We used the "Where" key workd inside the Query to Filter the record from the database and the used the condition inside the query statment for manipulating the data
+           Example of the "SELECT DISTINCT" Statement.
+                 Select  * from Cuntoury WHERE countryid > 5; (which mean that retrive the whole record which countryid is grater then 5).
+	 Select * from Customers WHERE Country='Mexico'; (in this we used where as a condition "select only those country which country is 'Mexico'").
+      Note:- "We can also used the logic operation"  =>  OR, AND, NOT
+      Q:- Descibe the few operator used in Where?
+      Ans:- Few of the Operator in "Where" are.
+				Operator					Description
+				     =				   	    Equal
+				     <>				   	    Not equal. Note: In some versions of SQL this operator may be written as !=
+				      >				   	    Greater than
+				      <				   	    Less than
+				      >=					    Greater than or equal
+				      <=					     Less than or equal
+				BETWEEN			   	    Between an inclusive range
+				       IN				   	    To specify multiple possible values for a column (short hand for the "OR" condition)
+				    LIKE					    Search for a pattern
+ 			The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. There are two wildcards used in conjunction with the LIKE operator:
+						% - The percent sign represents zero, one, or multiple characters (Wildcard)
+							_ - The underscore represents a single character (Wildcard)
+      Q:- What is Null in Sql?
+      ANs:- It is very important to understand that a NULL value is different from a zero value or a field that contains spaces. it is blanck nating inside the index
+      Q:- what is Aliases?
+      ANs:- SQL aliases are used to give a table, or a column in a table, a temporary name ("AS")
+<====================================================================================================================================================================>
+								      Joint (Importantce)
+<====================================================================================================================================================================>
+      Q:- Different Types of SQL JOINs?
+      ANs:- Here are the different types of the JOINs in SQL:
+	(INNER) JOIN: Returns records that have matching values in both tables.
+	LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table.
+	RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table.
+	FULL (OUTER) JOIN: Return all records when there is a match in either left or right table.
+	Self  JOIN: A self JOIN is a regular join, but the table is joined with itself.
+        Q:- How we count the number of apparecne in Table attribute more then one come?
+        ANs:- Well we used the "Group By with the 'Count'".
+	SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country;
+       Q:- What is Index? (Importance hai)
+       ANs:- The CREATE INDEX statement is used to create indexes in tables.
+	Indexes are used to retrieve data from the database very fast. The users cannot see the indexes, they are just used to speed up searches/queries.
+            
+
+									Normalization
+           Normalization meain normalized the data which are not proper set
+           1NF :- In 1NF hum aik table ko reail form mei ly kr a ie gy. mean that ager aik table k coulume mei aik sy ziyada value store hai tu un ko first of all table ki  form mei covert kr a gay
+           2NF:-  phir jub table 1NF mei huga hu dublicate waly side mei kr k spred table bana a gay
+<====================================================================================================================================================================>
+									angularJs, angular-2-4-5
+<====================================================================================================================================================================>
+									     ANGULAR-4
+Q:--const and let use {and} blocks as containers, hence "block	scope
+Q:- webpack takes modules with dependencies and generates static assets representing those modules
+Q:-What is difrence b/w Promise and Observable?.
+A:- Promise resolves to a single value asynchronously, an observable resolves to (or emits) multiple values asynchronously (over time).
+Q:- What is Class?
+A:- Class is Template that describe the behaviour of the object, where object is the instance of the object.
+Q:- Refresher on "This"
+A:- This keyword refre to the instance of the class.
+Q:- Arrow Functions
+A:- ES6 offers some new Syntax to dealing with "this" -> arrow function
+example:-
+items.forEach(function(x) {
+    console.log(x);
+	incrementedItems.push(x+1);		
+});
+Q:- Logic Test
+A:- example:-
+constructor(toppings) {
+	this.toppings = Array.isArray(toppings) ? toppings : [];
+}
+Q:-What is Template String.
+A:- JavaScript text is enclosed within matching " or '
+example:-
+var naem = 'Pakistan';
+var age = 42;
+console.log('hello my name is ' + naem + ' age '+ age);
+ES6	introduces a new type of string literal	that is	marked	with back ticks(`).
+var	name = 'Sam';
+var	age	=	42;
+console.log(`hello	my	name is	${name}, and I am ${age} years old`);
+Q:- When Object Initialize
+A:- Class Constructor is called when an object is created using the 'new' operator
+Q:- @ViewChild, @ViewChildren(Alert)alerts:	QueryList<Alert>;---> such like alred box also used for the attribute
+Q:- Directive are import {vardirectiv->ngclass and ngstyle,NgIf,Ngfor, switch, @Directive component change-base}
+Q:- Passing	Data into a	Component
+Q:- Two ways to pass data into a component property binding and event binding(@Input,@Output)
+Q:- important Question for interview 
+Q:- declarations: [component], import: [module, routhing], provider: [service], bootsrap[main first component]
+Q:- [{Component : ng g component my-new-component}, {Directive :	ng g directive my-new-directive},
+Q:- {Pipe : ng g pipe my-new-pipe}, {Service :	ng g service my-new-service},
+Q:- {Class :	ng g class my-new-class}, {Guard :	ng g guard my-new-guard},
+Q:- {Interface : ng g interface my-new-interface}, {Enum : ng g enum my-new-enum},{Module : ng g module my-module}]
+Q:- Spread and Rest Operators(... used this inside the (Array, function, multiple variable destructuring), Rest work opposite the spread operator)
+Q:- (imp)Destructuring (is way for extract data quikly from {},[], withouth having to write much code)
+
+let	foo	= ['one','two','three'];
+let	[one, two, three] =	foo;
+console.log(one);//	'one'
+Modules(isolated the data and code(short (Package and library))).
+Q:- export used for share data outside the module example below
+export const pi = "Pakistan";
+variable (var, let, const, any)
+var => are scope to function(aik function k var second function k var k under used ni kr ty)
+let is useful when used in a loop
+Const has been assigned the identifier cannot be reassigned
+example under stand kr
+const person = { name: 'tammy'; };
+person.name = 'Pushpa' --> value change
+person = null --> error
+Types (boolean,number,string,[]-> number[],boolean[],{}, undefined, enum{red,blue,green},any,void)
+	nickName?:	string;
+Type keyworkd
+type Age = number | string;
+function admitAge(age: Age): string {
+return 'I am ${age} alright?!';
+}
+interface	Kicker	{		kick(speed:	number):	number; }
+interface	Puncher	{		punch(power:	number):	number; } //	assign	intersection	type	definition	to	alias	KickPuncher type	KickPuncher	=	Kicker	&	Puncher;
+--------------------------------------------
+app.component.ts(selector, template url) ---> root-component
+index.html ---> <app></app> and main.ts which is the entry point of the application read the module
+------------------------------------------
+
+@OutPut() result: EventEmitter = new EventEmitter();
+
+this.result.emit(this.count);
+
+(result) = onChange($event)
+onchange(val: number) {
+ this.parentCount = val;
+}
+
+we used this for the console ok
+interface PrintOutPut {
+	(message: string): void;
+	(message: string[]): void;
+}
+
+let printOut: PrintOutput = (message) => {
+	if(Array.isArray(message)) {
+		console.log(message.join(', ')):
+	} else{
+		console.log(message);
+	}
+}
+
+printOut("hello");
+printOut(['hi','bye']);
+
+type str = string;
+let cheese: str = "gorgonzola";
+let cake: str = 10;
+
+Union Types
+adminAge(age: number|string): string {
+ return `I'm ${age}, alright?!`;
+}
+
+type Age = number|string;
+
+adminAge(age: Age): String {
+ return `I'm ${age}, alright?!`;
+}
+<====================================================================================================================================================================>
+									OOP
+<====================================================================================================================================================================>
+Class is not physical it is logical implementatino of the Object
+Q:- What is Object?
+ANs:- Object mean real word entity which describe the behaviour such as pen, chair, table it can be physical or logical
+Q:- What is Class?.
+ANs:- A Class is singleton ya phir blueprints of object where we dscribet the behaviour of object. and we create the object(Bicycle)
+Q:- What is Inheritance?
+ANs:- Inheritance mean one object can acquires all the properties and behaviours of parent object
+Q:- What is Polymorphism?
+ANs:- One thask is performed by different ways know as polymorphism
+Q:-  what is Abstraction?
+ANs:- Hiding internal details and showing functionality
+Q:- what is Encapsulation?
+ANs:- Binding (or wrapping) code and data together into a single unit is known as encapsulation. For example: capsule
+Java bean is the fully encapsulated class because all the data members are private here.
+Q:- What is State and behaviour?.
+ANs:- State represents data of an object. where the behavior represents the functionallity of an object such as method.
+Q:- What class contain?
+ANs:- Class can contain the (field, method, constructor,block, nested class and interface)
+Q:- Object where allocate memory and Structrue object
+ANs:- Object allocate the memory in Heap memory. where the structure allocate the memory in stack.
+Q:- Ways to initialize object?
+ANs:- (1) By reference variable, (2)By method,  (3)By constructo , (4) Anonymous object  (new Student();)
+Anonymous simply means nameless. An object which has no reference is known as anonymous object
+(1) By reference variable
+Student student = new Student();
+student.name = "nabeel";
+student.lastname = "ahmed";
+(2) By method
+Student student = new Student();
+student.call("Nabeel Ahmed", 0622555555);
+(3)By constructo
+Student student = new Student(1,256, 25);
+Q:- What is Constructor?
+ANs:- Constructor is a special type of method that is call when object is create. have same name of the class, no return type
+Q:- Type of Constructor?
+ANs:- only have 2 type (Default Consturctor and Parameterized Constructor). If there is no constructor in a class, compiler automatically creates a default constructor
+Q:- What is Constructor Overloading?
+ANs:- Constructor Overloading is a technique in java. where we can have any number of constructor that have differ parameter lists.
+Q:- How to Copy the Constructor?
+ANs:- There are many whay to Copy the constructor?.
+(1) By Constructor, (2) By assigning the value of one object in to the another object, (3) By Clone method of Object Class
+(1) By Constructor
+    Student6 s1 = new Student6(111,"Karan");  
+    Student6 s2 = new Student6(s1);
+(2) By assigning the value of one object in to the another object.
+Student s1 = new Student(1, 25);
+Student s2 = new Student();
+s2.firstName = s1.firstName;
+s2.lastName = s1.lastName;
+(3) By Clone method of Object Class
+Q:- What is Static keyWord?
+ANs= Static key word can be used with the (block, variable, method, nested class). The variable created by the Static is unique for each object. mean that it share the with all object. and it save memory
+static method can access static data member and can change the value of it. this and super cannot be used in static context.
+Q:- Can we execute the prgrame with main method.
+ANs:- Yes We can by useing Static block.
+Q:- What is "this" keyword in java.
+ANs:- this is a reference variable that refers to the current object. (this help us to protect the "ambiguity") like 
+setuser(String firstName){
+this.firstName = firstName;
+}
+this can invoke the current constructor (mean call again), this() constructor call should be used to reuse the constructor from the constructor.
+//m();//same as this.m()   (compiler time process.....)
+Q:- What is Inheritance?
+ANs:- Inheritance is a way in which one object acquires all the state and behaviors of parent object  (IS-A, HAS-A) (Single, Multilevel, Hierarchical) not Multiple Multiple inheritance is not supported in java through class.
+Resion whay not used the Multipule Inheritance.....
+class A{  
+void msg(){System.out.println("Hello");}  
+}  
+class B{  
+void msg(){System.out.println("Welcome");}  
+}  
+class C extends A,B{//suppose if it were  
+   
+ Public Static void main(String args[]){  
+   C obj=new C();  
+   obj.msg();//Now which msg() method would be invoked?  
+}  
+}
+
+IS-A =====> Single, Multilevel, Hierarchical
+HAS-A ======> Aggregation  (Help us create the Multilevel Inharitance)
+class A{  
+void msg(){System.out.println("Hello");}  
+}  
+class B{  
+void msg(){System.out.println("Welcome");}  
+}  
+class C extends A{//suppose if it were  
+  B b; 
+ Public Static void main(String args[]){  
+   C obj=new C();  
+   obj.msg();//Now which msg() method would be invoked?  
+}  
+}
+Q:- What is Diff b/w Overloading/Overriding?
+ANs:- Thay both come under the Polymorphism.
+Overloading mean one method can be write with same name difference parameter and difference return type  (compilertime polymorphism)
+There are two ways to overload the method in java
+  (1) By changing number of arguments  (2) By changing the data type
+Q:- Can we overload java main() method?  => YES.
+Overriding mean one method can be write in the both parent and child class have same parameter and varaible  (runtime polymorphism)
+Q:- Final key workd?
+ANs- If we used the final key workd with the variable it can not be change the value, if we used this final key work with any method it cannot be override. if we used this final keyword with class this class cannot be inheritance
+action perform. blank final variable  like (private final id; constructor k under init krwa ddo)
+an overridden method is called through the reference variable of a superclass. (upcasting/downcasting)
+Q:- What is Interface?
+ANs:- Interface is way to achive the 100% of Abstraction. we can used inSide the (static constasts and abstract method) this can be represent the (IS-A)
+In Java 8 We used the (default and static method inSide the interface) when we compile the code the compiler take the method look like abstric public method
+We can Implement the interface to the class and can be extened the two interface. simlary we can extend the class's   (Point ==> Multiple level inheritance can be don in "Interface"   ==> amiguity huja ta hai)
+Q:- What is marker or tagged interface?
+ANs:- An Interface that have no member is known as marker or tagged interface 
+Example of The (Cloneable , Remote, Serializable)
+Q:- What Access Modifiers in java.
+ANs:- There are two type of Access Modifiers in java (Non Access Modifiesrs and Access Modifires)
+Where Non Access Modifiesrs => (static, abstract, synchronise) and the other are Access Modifiesrs => (public, private, default, protected )=> default, protected are important
+Private => The private access modifier is accessible only within class.
+Public -> The public access modifier is accessible  within class and also the out site the class.
+Protected => The default modifier is accessible only within package.
+Defualt => The protected access modifier is accessible within package and outside the package but through inheritance only.
+<====================================================================================================================================================================>
+									Core JAVA
+Q:- String Pool?
+ANs:- When we create the String Literal it store in the heap. next time when i create the same type of variable this will check value in the heap pool
+if the value was their it creat the ref variable
+Q:- What is Immutable String;
+ANs:- Immutable simply means unmodifiable or unchangeable.
+String s = "nabeel";
+s.concate("Ahmed");
+console.log(s);  // nabeel
+// butt in memory new instance create whihc was ====>nabeel ,nabeel Ahemd
+// we have to used the 
+s = s.conate(Ahmed);  // here this will refer to the new one String
+Q:- String compare
+ANs:- as we now the concept of pool
+String s1="Sachin";  
+   String s2="Sachin";  
+   String s3=new String("Sachin");  
+   String s4="Saurav";  
+   System.out.println(s1.equals(s2));//true  
+   System.out.println(s1.equals(s3));//true  
+   System.out.println(s1.equals(s4));//false 
+    // secand case  
+   System.out.println(s1==s2);//true (because both refer to same instance)  
+   System.out.println(s1==s3);//false(because s3 refers to instance created in nonpool)  
+Q:- Java Regex?
+ANs:- Java Regex are call the Regular Expressiong is an api to define the pattern for searching or manipulating string (halp full password email validation)
+Q:- What is exception
+ANs:- Dictionary Meaning: Exception is an abnormal condition
+Q:- Serialization in java 
+ANs:- Serialization in java is a mechanism of writing the state of an object into a byte stream. Java transient keyword is used in serialization. If you define any data member as transient, it will not be serialized.
+while if we used this jpa the field is not store in the database
+Q:- What is Collection in java?
+ANs:-  Collection in jav is a framework that provides an architecture of data structured like(Stroe,Maniplate).
+Collectoin k under interface or class huti hai 
+like (list,set, queue,dqueue) and class like (ArrayList, Vector, LinkedList, PriorityQueue, Hashset)
+Q:- What is ArrayList?
+ANs:-(Index point hai) ArrayList is class that used the dynamic array for storing the elements. ArrayList class maintains insertion order, no Synchronized, allow to access rondom because array works at the index basix.
+manipulation process is slow if any delete opertion occurred.
+Q:-  What is LinkedList?
+ANs:- LinkedList class uses double linked list to store the elements. it used the linke list data-structure. 
+we can used Java LinkedList class can be used as list, stack or queue
+Q:- What is Hashing
+ANs:- Hashing means using some function or algorithm to map object data to some representative integer value. uses a hash table for storage.
+Q:- Comparable and Comparator Interface?
+ANs:- Comparable ka comareTo() => which is used to order the object on the base of single value and used by using the implemention
+while the using the Comparator => ka compare() => It provides multiple sorting sequence i.e. you can sort the elements on the basis of any data member, for example rollno, name, age or anything else.
+// comparable  direct class k 7 implement huta hia or jab k comarator used the other classs
+Q:- String s = null;
+println(s.legth());
+Q:- String s = "abc";
+int i = Integer.parseInt(s);  // exception
+<====================================================================================================================================================================>
+									JSP, JSTL
+JSP technology is used to create web application just like Servelet technology. JSP page consists of HTML and JSP tags
+Q:- How many type of JPA Scripting Element?
+
+ANs:- There are three types of Scripting elements
+      => scriptlet tag  => expression tag  => declaration tag
+      => scriptlet tag :- <% java source code%>,  => expression tag :- <%=  "Welcome to jsp"%>
+      => declaration tag:- JSP declaration tag is used to declare fields and methods.   <%!  field or method declaration  %>
+Q:-  What is difference b/w the JSP Scriptlet tag and the JSP Declaration Tag
+ANs:- Scriptlet tag can only declare variable not method while the Declaration Tag can be declare both(Variable and Method)
+<====================================================================================================================================================================>
+<====================================================================================================================================================================>
+									Spring-boot, JPA, Maven, Jhipster
+Maven:-  Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM)
+Jhipster:- JHipster is a development platform to generate, develop and deploy Spring Boot + Angular Web applications and Spring microservices.
+JPA:- work on Eclipselink, Spring Data JPA we used.
+Q:-  OneToOne unidirectional and bidirectional
+ANs:- Unidirectional:-  In a unidirectional relationship just one side of the relationship knows (“sees”) the other. Notice
+that Person knows Cellular but Cellular does not know Person. 
+Bidirectional:-  both with "mappedBy" setted. the foreign key must exist inside the
+person table, and not the Cellular table.
+@JoinColumn indicates that this entity is the owner of the relationship 
+<====================================================================================================================================================================>
+spring provoide the templates for JDBC, Hibernate, JPA which help us lose codeing 
+no requirement for XML configuration, Embed Tomcat no need to add the jar file
+@RequestMapping annotation is used to provide routing information
+@RestController is a stereotype annotation. It adds @Controller and @ResponseBody annotations to the class
+Inversion Of Control (IOC) and 
+Dependency Injection====> lose coupling 
+IOC => tight coupling / lose coupling
+tight coupling => {
+
+ class User {
+   Address address;
+   public User() {
+	address = new Address();  // tight coupling;
+    }
+
+    public User(Address address) {
+        this.address = address;
+    }
+}
+}
+Dependency injection can happen in the way of passing parameters to the constructor or by post-construction using setter methods
+and is a mandatory cache through which all requests must pass
