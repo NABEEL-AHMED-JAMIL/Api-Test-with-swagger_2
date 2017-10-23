@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
@@ -11,61 +12,14 @@ import java.util.Date;
 //   "exception":"java.lang.NullPointerException",
 //   "message":"No message available","path":"/user/645"
 // }
+ @XmlRootElement
 public class RestErrorInfo {
 
-    private Date date;
-    private String status;
-    private String error;
-    private String exception;
-    private String message;
-    private String path;
+    public final String detail;
+    public final String message;
 
-
-    public RestErrorInfo() {}
-    public RestErrorInfo(Date date, String status, String error,String exception, String message, String path) {
-        this.date = date;
-        this.status = status;
-        this.error = error;
-        this.exception = exception;
-        this.message = message;
-        this.path = path;
+    public RestErrorInfo(String detail, Exception exception) {
+        this.detail = detail;
+        this.message = exception.getMessage();
     }
-
-    public Date getDate() { return date; }
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getError() { return error; }
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getMessage() { return message; }
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getPath() { return path; }
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getException() { return exception; }
-    public void setException(String exception) {
-        this.exception = exception;
-    }
-
-    @Override
-    public String toString() {
-        return "RestErrorInfo{" + "date=" + date + ", status='" + status + '\'' +
-                ", error='" + error + '\'' + ", exception='" + exception + '\'' +
-                ", message='" + message + '\'' + ", path='" + path + '\'' + '}';
-    }
-
 }

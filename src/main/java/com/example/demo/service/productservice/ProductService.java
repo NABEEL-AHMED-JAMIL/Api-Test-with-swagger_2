@@ -1,9 +1,7 @@
 package com.example.demo.service.productservice;
 
 import com.example.demo.model.Product;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import java.util.List;
 
 /**
  * Created by Nabeel on 9/24/2017.
@@ -11,9 +9,9 @@ import org.springframework.cache.annotation.Cacheable;
 public interface ProductService {
 
 
-    Iterable<Product> listAllProducts();
+    List<Product> listAllProducts();
 
-    Product getProductById(Long id);
+    Product getProductById(Long id) throws NullPointerException;
 
     void saveProduct(Product product);
 

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by fanjin on 2017-10-07.
+ * Created by Nabeel on 9/24/2017.
  */
 @Component
 public class TimeProvider implements Serializable {

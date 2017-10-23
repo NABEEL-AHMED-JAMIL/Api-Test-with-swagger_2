@@ -9,6 +9,9 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Created by Nabeel on 9/24/2017.
  */
@@ -19,23 +22,26 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    // Ok method work
     @Override
-    public Iterable<Product> listAllProducts() {
-        System.out.println("Retrieving from Database");
+    public List<Product> listAllProducts() {
         return this.productRepository.findAll();
     }
 
+    // Ok method work
     @Override
     @Cacheable(value = "products", key = "#id")
     public Product getProductById(Long id) {
-        System.out.println("Retrieving from Database");
-        return this.productRepository.findOne(id);
+        Product product = this.productRepository.findOne(id);
+        if(!(product.equals(null))){
+            return product;
+        }
+        throw new NullPointerException("Null Pointer Exception");
     }
 
     @Override
     @CachePut(value = "products", key = "#product.id")
     public void saveProduct(Product product) {
-        System.out.println("Retrieving from Database");
         this.productRepository.save(product);
     }
 
@@ -53,3 +59,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
 }
+
+
+

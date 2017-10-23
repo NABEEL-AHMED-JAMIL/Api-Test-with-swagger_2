@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
+import java.util.Iterator;
 import static com.example.demo.util.RequestMapping.*;
 
 /**
@@ -32,11 +31,11 @@ public interface IProductController {
             @ApiResponse(code = 500, message = "The Data not contain")
     })
     @RequestMapping(value = LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    ResponseEntity<Iterable<Product>> list(io.swagger.models.Model model);
+    ResponseEntity<Iterator<Product>> list();
 
     @ApiOperation(value = "Search a product with an ID",response = Product.class)
     @RequestMapping(value = SHOW_PRODUCT, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    ResponseEntity<Product> showProduct(@PathVariable Long id, Model model);
+    ResponseEntity<Product> showProduct(@PathVariable Long id);
 
     @ApiOperation(value = "Add a product")
     @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},

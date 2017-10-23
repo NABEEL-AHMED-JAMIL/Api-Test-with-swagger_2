@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,20 +27,18 @@ public abstract class AbstractRestHandler implements ApplicationEventPublisherAw
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(DataFormatException.class)
-    public
-    @ResponseBody
-    RestErrorInfo handleDataStoreException(DataFormatException ex, WebRequest request, HttpServletResponse response) {
+    public RestErrorInfo handleDataStoreException( DataFormatException ex ) {
         log.info("Converting Data Store exception to RestResponse : " + ex.getMessage());
 
-        return new RestErrorInfo();
+        return new RestErrorInfo("You messed up.", ex);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public @ResponseBody RestErrorInfo handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request, HttpServletResponse response) {
+    public RestErrorInfo handleResourceNotFoundException(ResourceNotFoundException ex ) {
         log.info("ResourceNotFoundException handler:" + ex.getMessage());
 
-        return new RestErrorInfo();
+        return new RestErrorInfo("Sorry I couldn't find it.", ex);
     }
 
 
