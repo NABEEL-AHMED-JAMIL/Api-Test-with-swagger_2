@@ -1,11 +1,7 @@
 package com.example.demo.service.customerservice;
 
 import com.example.demo.model.Customer;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 /**
  * Created by Nabeel on 9/26/2017.
@@ -15,9 +11,9 @@ import javax.persistence.EntityNotFoundException;
 public interface CustomerService {
 
 
-    Customer findByEmail(String email);
+    Customer findByEmail(String email) throws NullPointerException;
 
-    Iterable<Customer> listAllCustomers();
+    List<Customer> listAllCustomers();
 
     Customer saveCustomer(Customer customer);
 

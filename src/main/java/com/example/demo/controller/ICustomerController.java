@@ -1,7 +1,5 @@
-package com.example.demo.controller.customercontroller;
+package com.example.demo.controller;
 
-import com.example.demo.exception.DataFormatException;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Customer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,11 +7,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Iterator;
 
 import static com.example.demo.util.RequestMapping.*;
 
@@ -22,10 +21,6 @@ import static com.example.demo.util.RequestMapping.*;
  */
 @Api(value="customer", description="Customer Operation handling")
 public interface ICustomerController {
-
-    @ApiOperation(value = "Search with an Email", response = Customer.class)
-    @RequestMapping(value = FIND_BY_EMAIL, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    ResponseEntity<Customer> findByEmail(@PathVariable String email);
 
     @ApiOperation(value = "View a list of available customer",response = Iterable.class)
     @ApiResponses(value = {
@@ -37,8 +32,11 @@ public interface ICustomerController {
     })
     @RequestMapping(value = CUSTOMER_LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
     @PreAuthorize("hasRole('ADMIN')")
-    ResponseEntity<Iterable<Customer>> list(Model model);
+    ResponseEntity<Iterator<Customer>> list();
 
+    @ApiOperation(value = "Search with an Email", response = Customer.class)
+    @RequestMapping(value = FIND_BY_EMAIL, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
+    ResponseEntity<Customer> findByEmail(@PathVariable String email);
 
     @ApiOperation(value = "New Customer Save")
     @RequestMapping(value = SAVE_CUSTOMER, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
@@ -47,14 +45,14 @@ public interface ICustomerController {
     ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Update..... Detail")
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = UPDATE_CUSTOMER, method = RequestMethod.PUT, consumes = { "application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
+    @PreAuthorize("hasRole('ADMIN')")
     ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Delete....")
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value= DELETE_CUSTOMER, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
+    @PreAuthorize("hasRole('ADMIN')")
     ResponseEntity<?> deleteCustomer(@PathVariable Long id);
 
 }

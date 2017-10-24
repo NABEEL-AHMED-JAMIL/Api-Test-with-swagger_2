@@ -60,9 +60,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
                 .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and().authorizeRequests().
-                antMatchers( HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css",
-                "/**/*.js").permitAll()
-                .antMatchers("/auth/**").permitAll()
+                antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, userDetailsService), BasicAuthenticationFilter.class)
                 .logout()
@@ -84,6 +82,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 "/auth/login"
         );
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**");
     }
 
 }

@@ -1,17 +1,19 @@
-package com.example.demo.controller.customercontroller;
+package com.example.demo.controller;
 
-import com.example.demo.controller.AbstractRestHandler;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.customerservice.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Iterator;
+import java.util.List;
+
 import static com.example.demo.util.RequestMapping.CUSTOMER;
 
 /**
@@ -23,21 +25,27 @@ public class CustomerController extends AbstractRestHandler implements ICustomer
 
     @Autowired
     private CustomerService customerService;
+    private Customer customer;
 
     @Override
-    public ResponseEntity<Iterable<Customer>> list(Model model) {
-        Iterable customerList = customerService.listAllCustomers();
-        if(customerList != null) {
-            return new ResponseEntity(customerList, HttpStatus.OK);
+    public ResponseEntity<Iterator<Customer>> list() {
+        List<Customer> customers = customerService.listAllCustomers();
+        if(!customers.isEmpty()) {
+            return new ResponseEntity(customers, HttpStatus.OK);
         }
-        // show error if null flase
         throw new ResourceNotFoundException("Empty List");
     }
 
     @Override
     public ResponseEntity<Customer> findByEmail(@PathVariable String email) {
-        System.out.println("email:" + email);
-        return new ResponseEntity(this.customerService.findByEmail(email), HttpStatus.OK);
+        try {
+            System.out.println("email:" + email);
+            customer = this.customerService.findByEmail(email);
+            return new ResponseEntity(customer, HttpStatus.OK);
+
+        }catch (NullPointerException e) {
+            throw new ResourceNotFoundException("Data Not Found");
+        }
     }
 
 

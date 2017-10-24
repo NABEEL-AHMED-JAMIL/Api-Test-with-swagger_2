@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 /**
  * Created by Nabeel on 9/26/2017.
@@ -17,22 +17,22 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private CustomerRepository customerRepository;
+    private Customer customer;
+
+    @Override
+    public List<Customer> listAllCustomers() {
+       return this.customerRepository.findAll();
+    }
 
     @Override
     @Cacheable(value = "customers", key = "#email")
     public Customer findByEmail(String email) {
-        System.out.println("email:" + email);
-        // replace this by log
         System.out.println("Retrieving from Database");
-        Customer customer = this.customerRepository.findByEmail(email);
-        System.out.println(customer.toString());
-        return customer;
-    }
-
-    @Override
-    public Iterable<Customer> listAllCustomers() {
-        System.out.println("Retrieving from Database");
-        return this.customerRepository.findAll();
+         customer = this.customerRepository.findByEmail(email);
+        if(!(customer.equals(null))){
+            return customer;
+        }
+        throw new NullPointerException("Null Pointer Exception");
     }
 
     @Override

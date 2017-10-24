@@ -7,7 +7,9 @@ import com.example.demo.security.TokenHelper;
 import com.example.demo.security.auth.JwtAuthenticationRequest;
 import com.example.demo.util.common.DeviceProvider;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,13 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Nabeel on 10/17/2017.
  */
 @RestController
 @RequestMapping( value = "/auth", produces = {"application/json", "application/xml"} )
-@Api(value="auth", description="Customer Authentication Controller")
+@Api(value="AuthenticationController", description="Customer Authentication Controller")
 public class AuthenticationController {
 
     @Autowired
@@ -42,17 +45,15 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private DeviceProvider deviceProvider;
 
+
+   // @ApiOperation(value = "Create Authentication Token", response = CustomerTokenState.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"} )
     public ResponseEntity<?> createAuthenticationToken( @RequestBody JwtAuthenticationRequest authenticationRequest,
             HttpServletResponse response, Device device ) throws AuthenticationException, IOException {
 
-        // Perform the security
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
@@ -60,7 +61,6 @@ public class AuthenticationController {
                 )
         );
 
-        // Inject into security context
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // token creation
@@ -73,6 +73,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new CustomerTokenState(jws, (long) expiresIn));
     }
 
+    @ApiOperation(value = "Refresh Authentication Token", response = CustomerTokenState.class)
     @RequestMapping(value = "/refresh", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public ResponseEntity<?> refreshAuthenticationToken(
             HttpServletRequest request,
@@ -107,4 +108,17 @@ public class AuthenticationController {
         authCookie.setMaxAge( expiresIn );
         return authCookie;
     }
+
+    @ApiOperation(value = "Logout Authentication Token")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
+    public ResponseEntity<?> refreshAuthenticationToken() {
+        // call the evit method
+        Map<String,String> result =new HashMap<String,String>();
+        result.put( "result", "success");
+
+        return new ResponseEntity<Object>(result, HttpStatus.OK);
+    }
+
+
+
 }

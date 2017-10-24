@@ -1,3 +1,7 @@
+# EMBEDDED SERVER CONFIGURATION
+server:
+  contextPath: /api
+
 app:
   name: demo
 

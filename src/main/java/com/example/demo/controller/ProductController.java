@@ -1,6 +1,5 @@
-package com.example.demo.controller.productcontroller;
+package com.example.demo.controller;
 
-import com.example.demo.controller.AbstractRestHandler;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Product;
 import com.example.demo.service.productservice.ProductService;
@@ -39,10 +38,11 @@ public class ProductController extends AbstractRestHandler implements IProductCo
     public ResponseEntity<Product> showProduct(@PathVariable Long id) {
         try {
             this.product = productService.getProductById(id);
+            return new ResponseEntity(product, HttpStatus.OK);
         }catch (NullPointerException e) {
             throw new ResourceNotFoundException("Data Not Found");
         }
-        return new ResponseEntity(product, HttpStatus.OK);
+
     }
 
     @Override

@@ -36,8 +36,6 @@ public class Customer implements UserDetails {
     private String username;
 
     @Column(name = "email", nullable = false, unique = true)
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
-            "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="{invalid.email}")
     @ApiModelProperty(notes = "The give us valid email like 'nabeel.amd93@gmail.com'", required = true)
     private String email;
 
