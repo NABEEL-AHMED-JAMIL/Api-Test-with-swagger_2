@@ -4,8 +4,11 @@ package com.example.demo.util;
  * Created by Nabeel on 9/24/2017.
  */
 public interface RequestMapping {
-///product/list
-///product/show/1
+
+    String AUTH = "/auth";
+    String LOGIN = "/login";
+    String LOGOUT = "/logout";
+    String REFRESH = "/refresh";
 
     String PRODUCT = "/product";
     String LIST =  "/list";

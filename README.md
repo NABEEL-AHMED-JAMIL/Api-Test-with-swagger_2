@@ -1,3 +1,5 @@
+# Api-Test-with-swagger_2
+
 ```
   ____            _   _   _         _     _            _
  |  _ \          | | | | (_)       | |   (_)          (_)
@@ -17,7 +19,7 @@
 # --depth 1 removes all but one .git commit history
 git clone --depth 1 https://github.com/NABEEL-AHMED-JAMIL/Api-Test-with-swagger_2
 # change directory to our repo
-cd springboot-jwt-starter
+cd Api-Test-with-swagger_2
 
 # install the repo with mvn
 mvn install
@@ -37,42 +39,61 @@ mvn spring-boot:run
 springboot-jwt-starter/
  ├──src/                                                        * our source files
  │   ├──main
- │   │   ├──java.com.bfwg
+ │   │   ├──com.example.demo
+ │   │   │   ├──exception
+ │   │   │   │   └── DataFormatException.java
+ │   │   │   │   └── ResourceNotFoundException.java
  │   │   │   ├──config
- │   │   │   │   └──WebSecurityConfig.java                      * config file for filter, custom userSerivce etc.
+ │   │   │   │   └── CachingConfig.java
+ │   │   │   │   └──SecurityConfigurer.java             
+ │   │   │   │   └──SwaggerConfig.java
  │   │   │   ├──model
  │   │   │   │   ├──Authority.java
- │   │   │   │   ├──UserTokenState.java                         * JWT model
- │   │   │   │   └──User.java                                   * our main User model.
- │   │   │   ├──repository                                      * repositories folder for accessing database
- │   │   │   │   └──UserRepository.java
- │   │   │   ├──rest                                            * rest endpoint folder
- │   │   │   │   ├──AuthenticationController.java               * auth related REST controller, refresh token endpoint etc.
- │   │   │   │   └──UserController.java                         * REST controller to handle User related requests
- │   │   │   ├──security                                        * Security related folder(JWT, filters)
+ │   │   │   │   ├──CustomerTokenState.java             
+ │   │   │   │   └──Product.java                        
+ │   │   │   │   └──Customer.java
+ │   │   │   │   └──RestErrorInfo.java
+ │   │   │   ├──repository                              
+ │   │   │   │   └──ProductRepository.java
+ │   │   │   │   └──CustomerRepository.java
+ │   │   │   ├──controller                                            * rest endpoint folder
+ │   │   │   │   ├──AbstractRestHandler.java
+ │   │   │   │   ├──AuthenticationController.java
+ │   │   │   │   ├──CustomerController.java
+ │   │   │   │   ├──ICustomerController.java
+ │   │   │   │   ├──IProductController.java
+ │   │   │   │   ├──ProductController.java
+ │   │   │   ├──security                                        
  │   │   │   │   ├──auth
- │   │   │   │   │   ├──JwtAuthenticationRequest.java           * login request object, contains username and password
- │   │   │   │   │   ├──LogoutSuccess.java                      * controls the behavior after sign out.
- │   │   │   │   │   ├──RestAuthenticationEntryPoint.java       * handle auth exceptions, like invalid token etc.
- │   │   │   │   │   ├──TokenAuthenticationFilter.java          * the JWT token filter, configured in WebSecurityConfig
- │   │   │   │   │   └──TokenBasedAuthentication.java           * this is our custom Authentication class and it extends AbstractAuthenticationToken.
- │   │   │   │   └──TokenHelper.java                             * token helper class
+ │   │   │   │   │   ├──JwtAuthenticationRequest.java           
+ │   │   │   │   │   ├──LogoutSuccess.java                      
+ │   │   │   │   │   ├──RestAuthenticationEntryPoint.java       
+ │   │   │   │   │   ├──TokenAuthenticationFilter.java          
+ │   │   │   │   │   └──TokenBasedAuthentication.java           
+ │   │   │   │   └──TokenHelper.java                            
  │   │   │   ├──service
- │   │   │   │   ├──impl
- │   │   │   │   │   ├──CustomUserDetailsService.java           * custom UserDatilsService implementataion, tells formLogin() where to check username/password
- │   │   │   │   │   └──UserServiceImpl.java
+ │   │   │   │   ├──customerservice
+ │   │   │   │   │   ├──CustomerService.java          
+ │   │   │   │   │   └──CustomerServiceImpl.java
+ │   │   │   │   ├──fetchservice
+ │   │   │   │   │   └──FileFetchService.java
+ │   │   │   │   ├──productservice
+ │   │   │   │   │   ├─ProductService.java          
+ │   │   │   │   │   └──ProductServiceImpl.java
  │   │   │   │   └──UserService.java
- │   │   │   └──Application.java                                * Application main enterance
+ │   │   │   └──Application.java                          
  │   │   └──recources
- │   │       ├──static                                          * static assets are served here(Angular and html templates)
- │   │       ├──application.yml                                 * application variables are configured here
- │   │       └──import.sql                                      * h2 database query(table creation)
- │   └──test                                                    * Junit test folder
- └──pom.xml                                                     * what maven uses to manage it's dependencies
+ │   │       ├──application.yml                          
+ │   │       └──application.properties
+ │   │       └──import.sql
+ │   │       └──ehcache.xml
+ │   │       └──banner.txt                               
+ │   └──test                                             
+ └──pom.xml                                              
 ```
 
 ### Configuration
-- **WebSecurityConfig.java**: The server-side authentication configurations.
+- **SecurityConfigurer.java**: The server-side authentication configurations.
 - **application.yml**: Application level properties i.e the token expire time, token secret etc. You can find a reference of all application properties [here](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html).
 - **JWT token TTL**: JWT Tokens are configured to expire after 10 minutes, you can get a new token by signing in again.
 - **Using a different database**: This Starter kit is using an embedded H2 database that is automatically configured by Spring Boot. If you want to connect to another database you have to specify the connection in the *application.yml* in the resource directory. Here is an example for a MySQL DB:
@@ -98,42 +119,5 @@ for more info, checkout https://jwt.io/
 
 ___
 
-# Api-Test-with-swagger_2
-Testing Api Using the Swagger-2
 ## Check the demo for Swagger-Ui
 http://localhost:8080/swagger-ui.html for Check the out-put check the screen shot in screen-shot folder in project
-### Project Structure
-<h3>Model:-</h3>
-<ul>
-  <li>1:= Customer</li>
-  <ul>
-    <li>:= private Long id;</li>
-    <li>:= private String firstName;</li>
-    <li>:= private String lastName;</li>
-    <li>:= private String email;</li>
-    <li>:= private Date birthday;</li>
-    <li>:= private String homePhone;</li>
-    <li>  := private String password;</li>
-  </ul>
-  <li>2:= Product</li>
-  <ul>
-    <li>:= private Long id;</li>
-    <li>:= private Integer version;</li>
-    <li>:= private String productId;</li>
-    <li>:= private String description;</li>
-    <li>:= private String imageUrl;</li>
-    <li>:= private BigDecimal price;</li>
-  </ul>
-</ul>
-<h3>Repository:-</h3>
-<ul>
-  <li>1  CustomerRepository</li>
-  <li>2  ProductRepository</li>
-</ul>
-<h3>Service:-</h3>
-<ul>
-  <li>1  CustomerService -----Implement-------> CustomerServiceImpl</li>
-  <li>2  ProductService  -----Implement------> ProductServiceImpl</li>
-</ul>
-<h3>Security:-</h3>
-    .....still working

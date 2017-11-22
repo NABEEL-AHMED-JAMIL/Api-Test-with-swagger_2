@@ -37,7 +37,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain chain
     ) throws IOException, ServletException {
-
+        System.out.println("Do Filteri...................");
         String username;
         String authToken = tokenHelper.getToken(request);
 
