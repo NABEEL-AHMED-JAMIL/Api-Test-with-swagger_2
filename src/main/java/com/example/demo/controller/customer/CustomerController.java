@@ -1,5 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.controller.customer;
 
+import com.example.demo.controller.AbstractRestHandler;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.customerservice.CustomerService;

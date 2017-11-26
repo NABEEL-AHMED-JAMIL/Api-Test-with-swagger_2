@@ -40,7 +40,8 @@ public class SwaggerConfig {
                 "Spring Boot REST API for Online Store",
                 "1.0",
                 "Terms of service",
-                new Contact("Nabeel Ahmed", "https://github.com/NABEEL-AHMED-JAMIL", "nabeel.amd93@gmail.com"),
+                new Contact("Nabeel Ahmed",
+                        "https://github.com/NABEEL-AHMED-JAMIL", "nabeel.amd93@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0");
         return apiInfo;

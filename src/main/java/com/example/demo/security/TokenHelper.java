@@ -89,11 +89,9 @@ public class TokenHelper {
         try {
             final Claims claims = this.getAllClaimsFromToken(token);
             claims.setIssuedAt(a);
-            refreshedToken = Jwts.builder()
-                .setClaims(claims)
+            refreshedToken = Jwts.builder().setClaims(claims)
                 .setExpiration(generateExpirationDate(device))
-                .signWith( SIGNATURE_ALGORITHM, SECRET )
-                .compact();
+                .signWith( SIGNATURE_ALGORITHM, SECRET ).compact();
         } catch (Exception e) {
             refreshedToken = null;
         }
@@ -102,14 +100,9 @@ public class TokenHelper {
 
     public String generateToken(String username, Device device) {
         String audience = generateAudience(device);
-        return Jwts.builder()
-                .setIssuer( APP_NAME )
-                .setSubject(username)
-                .setAudience(audience)
-                .setIssuedAt(timeProvider.now())
-                .setExpiration(generateExpirationDate(device))
-                .signWith( SIGNATURE_ALGORITHM, SECRET )
-                .compact();
+        return Jwts.builder().setIssuer( APP_NAME ).setSubject(username).setAudience(audience)
+                .setIssuedAt(timeProvider.now()).setExpiration(generateExpirationDate(device))
+                .signWith( SIGNATURE_ALGORITHM, SECRET ).compact();
     }
 
     private String generateAudience(Device device) {
@@ -127,10 +120,8 @@ public class TokenHelper {
     private Claims getAllClaimsFromToken(String token) {
         Claims claims;
         try {
-            claims = Jwts.parser()
-                    .setSigningKey(SECRET)
-                    .parseClaimsJws(token)
-                    .getBody();
+            claims = Jwts.parser().setSigningKey(SECRET)
+                    .parseClaimsJws(token).getBody();
         } catch (Exception e) {
             claims = null;
         }
@@ -150,9 +141,7 @@ public class TokenHelper {
         Customer customer = (Customer) userDetails;
         final String username = getUsernameFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
-        return (
-                username != null &&
-                username.equals(userDetails.getUsername()) &&
+        return (username != null && username.equals(userDetails.getUsername()) &&
                         !isCreatedBeforeLastPasswordReset(created, customer.getLastPasswordRestDate()));
     }
 

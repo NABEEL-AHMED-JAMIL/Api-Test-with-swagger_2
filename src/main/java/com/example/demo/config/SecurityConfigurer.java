@@ -57,33 +57,27 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("Entry point............................");
-        http
-                .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
-                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and().authorizeRequests().
-                antMatchers("/auth/**").permitAll()
+
+        http.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ).and()
+                .exceptionHandling().authenticationEntryPoint( restAuthenticationEntryPoint ).and()
+                .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated().and()
-                .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, userDetailsService), BasicAuthenticationFilter.class)
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-                .logoutSuccessHandler(logoutSuccess)
-                .deleteCookies(TOKEN_COOKIE);
+                .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, userDetailsService),
+                        BasicAuthenticationFilter.class)
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                .logoutSuccessHandler(logoutSuccess).deleteCookies(TOKEN_COOKIE);
         // disable csrf for the login request
-        http
-                .csrf()
-                .ignoringAntMatchers("/auth/login")
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        http.csrf().ignoringAntMatchers("/auth/login").
+                csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter will ignore the below paths
-        web.ignoring().antMatchers(
-                HttpMethod.POST,
-                "/auth/login"
-        );
-        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**");
+        web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
+                "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**");
     }
 
 }

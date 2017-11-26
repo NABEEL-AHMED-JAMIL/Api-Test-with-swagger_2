@@ -53,7 +53,7 @@ public class AuthenticationController {
    // @ApiOperation(value = "Create Authentication Token", response = CustomerTokenState.class)
     @RequestMapping(value = LOGIN, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"} )
-    public ResponseEntity<?> createAuthenticationToken( @RequestBody JwtAuthenticationRequest authenticationRequest,
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
             HttpServletResponse response, Device device ) throws AuthenticationException, IOException {
 
         final Authentication authentication = authenticationManager.authenticate(
@@ -79,11 +79,8 @@ public class AuthenticationController {
 
     @ApiOperation(value = "Refresh Authentication Token", response = CustomerTokenState.class)
     @RequestMapping(value = REFRESH, method = RequestMethod.GET, produces = {"application/json", "application/xml"})
-    public ResponseEntity<?> refreshAuthenticationToken(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Principal principal
-            ) {
+    public ResponseEntity<?> refreshAuthenticationToken(HttpServletRequest request, HttpServletResponse response,
+            Principal principal) {
 
         String authToken = tokenHelper.getToken( request );
 

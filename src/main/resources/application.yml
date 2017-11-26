@@ -11,3 +11,5 @@ jwt:
   mobile_expires_in: 600 # 10 minutes
   secret: medicsi786%
   cookie: AUTH-TOKEN
+
+

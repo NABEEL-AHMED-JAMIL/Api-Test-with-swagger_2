@@ -40,7 +40,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @CachePut(value = "products", key = "#product.id")
     public void saveProduct(Product product) {
         this.productRepository.save(product);
     }

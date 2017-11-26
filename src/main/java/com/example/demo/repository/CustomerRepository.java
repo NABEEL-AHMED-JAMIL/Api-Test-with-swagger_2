@@ -13,9 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    String FIND_BY_EMAIL = "SELECT o FROM Customer o WHERE o.email = :email";
-    @Query(FIND_BY_EMAIL)
-    Customer findByEmail(@Param("email") String email);
+    Customer findByEmail(String email);
 
     Customer findByUsername( String username );
 }
