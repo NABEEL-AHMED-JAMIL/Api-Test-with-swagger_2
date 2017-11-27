@@ -1,0 +1,120 @@
+
+enum Gender{
+MALE, FEMALE
+}
+enum Status{
+ACTIVE, DISABLE
+}
+
+
+entity Degree{
+	id Integer,
+    name String,
+    yearOfPassing LocalDate,
+    institute String
+}
+
+
+entity Student{
+	id Integer,
+    firstName String,
+    lastName String,
+    dateOfBarth LocalDate,
+    gender Gender
+    phone String,
+    email String,
+    status Status
+}
+
+entity Family{
+	id Integer,
+    title String,
+    address String,
+    email String,
+    status Status
+}
+relationship OneToMany{
+   Family{students} to Student{family}
+}
+relationship OneToMany{
+	Family{billing} to Billing{family}
+}
+
+
+
+entity Instructor{
+    id Integer,
+    firstName String,
+    lastName String,
+    dateOfBarth LocalDate,
+    gender Gender
+    phone String,
+    email String,
+    status Status,
+    rating Integer,
+    joinDate LocalDate,
+    time String,
+
+}
+
+relationship OneToMany{
+    Instructor{cources} to Cources{instructor}
+}
+
+
+entity Offering{
+	id Integer,
+    fee Double,
+}
+relationship OneToMany{
+	Offering{cources} to Cources{offerings}
+}
+relationship OneToMany{
+	Instructor{degrees} to Degree{instructor}
+}
+relationship OneToMany{
+	Instructor{offerings} to Offering{instructor}
+}
+
+entity Cources{
+	id Integer,
+    name String,
+    description String,
+    level Integer,
+    // this is the array
+    books String,
+
+}
+
+
+entity Billing{
+    id Integer,
+    descriptoin String,
+    amount Double,
+    postDate LocalDate,
+}
+
+relationship OneToMany{
+	Billing{instructors} to Instructor{billing}
+}
+
+relationship ManyToMany{
+
+     Family{instructors} to Instructor{familys}
+}
+
+
+entity Enrollment{
+	id Integer
+    startDate LocalDate,
+    endedDate LocalDate,
+}
+ 
+relationship OneToMany{
+	Student{enrollment} to Enrollment{student}
+}
+relationship OneToMany{
+	Enrollment{offerings} to Offering{enrollment}
+}
+
+

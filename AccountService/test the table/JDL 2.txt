@@ -1,0 +1,104 @@
+
+enum Gender{
+MALE, FEMALE
+}
+enum Status{
+ACTIVE, DISABLE
+}
+
+entity Instructor{
+
+    firstName String,
+    lastName String,
+    dateOfBarth LocalDate,
+    gender Gender
+    phone String,
+    email String,
+    status Status,
+    rating Integer,
+    joinDate LocalDate,
+    time String,
+
+}
+
+entity Degree{
+    name String,
+    yearOfPassing LocalDate,
+    institute String
+}
+
+relationship OneToMany {
+  Instructor{Degree} to Degree{instructor}
+}
+
+entity Student{
+    firstName String,
+    lastName String,
+    dateOfBarth LocalDate,
+    gender Gender
+    phone String,
+    email String,
+    status Status
+}
+
+entity Family{
+    title String,
+    address String,
+    email String,
+    status Status
+}
+
+relationship OneToMany {
+  Family{childrens} to Student{family}
+}
+
+entity Course{
+    name String,
+    description String,
+    level Integer,
+    books String,
+}
+
+entity CourseOffering{
+    fee Double,
+	status Status
+}
+
+
+
+
+entity Enrollment{
+    startDate LocalDate,
+    endedDate LocalDate,
+    descriptoin String,
+	grade Integer
+}
+
+
+relationship OneToMany{
+	Instructor{offers} to CourseOffering{instructor}
+}
+
+
+relationship OneToMany{
+	CourseOffering{offers} to Course{course}
+}
+
+
+relationship OneToMany {
+  Student{enrollment} to Enrollment{student}
+}
+
+
+relationship OneToOne {
+  Enrollment{courseoffering} to CourseOffering{stdEnroll}
+}
+
+
+entity Billing{
+	studentId Integer,
+    parentId Integer,
+    teacherId Integer,
+    feeAmmount Double,
+    submitDate LocalDate
+} 
