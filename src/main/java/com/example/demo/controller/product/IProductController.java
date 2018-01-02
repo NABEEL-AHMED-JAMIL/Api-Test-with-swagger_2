@@ -39,18 +39,18 @@ public interface IProductController {
     @ApiOperation(value = "Add a product")
     @RequestMapping(value = SAVE_PRODUCT, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<Product> saveProduct(@RequestBody Product product);
 
     @ApiOperation(value = "Update a product")
     @RequestMapping(value = UPDATE_PRODUCT, method = RequestMethod.PUT, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product);
 
     @ApiOperation(value = "Delete a product")
     @RequestMapping(value= DELETE, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> delete(@PathVariable Long id);
 
 }

@@ -1,7 +1,5 @@
 package com.example.demo.service.fetchservice;
 
-import org.springframework.context.annotation.Configuration;
-
 /**
  * Created by Nabeel on 10/17/2017.
  */

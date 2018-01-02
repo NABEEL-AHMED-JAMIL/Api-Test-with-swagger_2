@@ -27,4 +27,10 @@ public class CustomerTokenState {
     public void setExpires_in(Long expires_in) {
         this.expires_in = expires_in;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerTokenState{" + "access_token='" + access_token + '\'' +
+                ", expires_in=" + expires_in + '}';
+    }
 }

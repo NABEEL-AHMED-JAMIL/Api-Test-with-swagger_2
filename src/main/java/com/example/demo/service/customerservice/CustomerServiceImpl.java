@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    @CacheEvict(value = "customers", key = "#email")
+    @CacheEvict(value = "customers", key = "#id")
     public void deleteCustomer(Long id) {
         System.out.println("Deleting from Database and also cachce");
         this.customerRepository.delete(id);

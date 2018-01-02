@@ -31,7 +31,7 @@ public interface ICustomerController {
             @ApiResponse(code = 500, message = "The Data not contain")
     })
     @RequestMapping(value = CUSTOMER_LIST, method= RequestMethod.GET, produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<Iterator<Customer>> list();
 
     @ApiOperation(value = "Search with an Email", response = Customer.class)
@@ -41,18 +41,18 @@ public interface ICustomerController {
     @ApiOperation(value = "New Customer Save")
     @RequestMapping(value = SAVE_CUSTOMER, method = RequestMethod.POST, consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Update..... Detail")
     @RequestMapping(value = UPDATE_CUSTOMER, method = RequestMethod.PUT, consumes = { "application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer);
 
     @ApiOperation(value = "Customer Delete....")
     @RequestMapping(value= DELETE_CUSTOMER, method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> deleteCustomer(@PathVariable Long id);
 
 }

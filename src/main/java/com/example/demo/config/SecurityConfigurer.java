@@ -23,6 +23,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static com.example.demo.util.RequestMapping.AUTH;
+import static com.example.demo.util.RequestMapping.LOGIN;
+import static com.example.demo.util.RequestMapping.LOGOUT;
+
 /**
  * Created by Nabeel on 9/24/2017.
  */
@@ -64,10 +68,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new TokenAuthenticationFilter(tokenHelper, userDetailsService),
                         BasicAuthenticationFilter.class)
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher(AUTH+LOGOUT))
                 .logoutSuccessHandler(logoutSuccess).deleteCookies(TOKEN_COOKIE);
         // disable csrf for the login request
-        http.csrf().ignoringAntMatchers("/auth/login").
+        http.csrf().ignoringAntMatchers(AUTH+LOGIN).
                 csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
@@ -75,7 +79,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter will ignore the below paths
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+        web.ignoring().antMatchers(HttpMethod.POST, AUTH+LOGIN);
         web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
                 "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**");
     }

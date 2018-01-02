@@ -5,11 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.sql.Timestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -147,4 +148,15 @@ public class Customer implements UserDetails {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id + ", username='" + username + '\'' +
+                ", email='" + email + '\'' + ", password='" + password + '\'' +
+                ", lastPasswordRestDate=" + lastPasswordRestDate +
+                ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday + ", mobilePhone='" + mobilePhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", enabled=" + enabled + ", authorities=" + authorities + '}';
+    }
 }

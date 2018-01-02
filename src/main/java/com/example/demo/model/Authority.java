@@ -19,7 +19,6 @@ public class Authority implements GrantedAuthority {
     @Column(name="name")
     String name;
 
-
     public Long getId() { return id; }
     public void setId(Long id) {
         this.id = id;
@@ -32,4 +31,8 @@ public class Authority implements GrantedAuthority {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Authority{" + "id=" + id + ", name='" + name + '\'' + '}';
+    }
 }

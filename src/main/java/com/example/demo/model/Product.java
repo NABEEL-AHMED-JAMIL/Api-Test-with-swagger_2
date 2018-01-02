@@ -11,7 +11,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "product")
-//
 public class Product implements Serializable {
 
     @Id
