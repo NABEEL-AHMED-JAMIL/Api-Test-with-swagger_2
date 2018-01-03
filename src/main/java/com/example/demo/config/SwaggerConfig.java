@@ -9,6 +9,9 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import static com.example.demo.util.RequestMapping.CUSTOMER;
+import static com.example.demo.util.RequestMapping.PRODUCT;
 import static com.google.common.base.Predicates.or;
 
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -29,8 +32,8 @@ public class SwaggerConfig {
     }
 
     private Predicate<String> postPaths() {
-        return or(regex("/product.*"),
-                regex("/customer.*"));
+        return or(regex(PRODUCT+".*"), regex(CUSTOMER+".*"),
+                regex(""),regex(""),regex(""));
         //,regex("/auth.*"));
     }
     private ApiInfo metaData() {

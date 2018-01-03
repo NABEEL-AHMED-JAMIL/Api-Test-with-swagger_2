@@ -10,18 +10,39 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * Created by Nabeel on 10/18/2017.
+ * @author by Nabeel on 10/18/2017.
  */
+/**************************************************************************
+ * @class CachingConfig that help to perform operation on rest api's class as Caching data
+ *
+ * @Bean cacheManager() : @class CacheManager
+ * @Bean cacheMangerFactory() : @class EhCacheManagerFactoryBean
+ *
+ *
+ **************************************************************************/
 @EnableJpaRepositories(basePackages = "com.example.demo.repository")
 @Configuration
 @EnableCaching
 public class CachingConfig {
 
+
+    /************************************************************************************************
+     * A property group for {@link CachingConfig } checking the {@link CacheManager }
+     *
+     * @return {@link CacheManager } for {@link CachingConfig } configuration
+     *
+     *************************************************************************************************/
     @Bean
     public CacheManager cacheManager() {
         return new EhCacheCacheManager(cacheMangerFactory().getObject());
     }
 
+    /************************************************************************************************
+     * A property group for {@link CachingConfig } checking the {@link EhCacheManagerFactoryBean }
+     *
+     * @return {@link EhCacheManagerFactoryBean } for {@link CachingConfig } configuration
+     *
+     *************************************************************************************************/
     @Bean
     public EhCacheManagerFactoryBean cacheMangerFactory() {
         EhCacheManagerFactoryBean bean = new EhCacheManagerFactoryBean();

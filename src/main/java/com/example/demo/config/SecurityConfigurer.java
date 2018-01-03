@@ -28,8 +28,25 @@ import static com.example.demo.util.RequestMapping.LOGIN;
 import static com.example.demo.util.RequestMapping.LOGOUT;
 
 /**
- * Created by Nabeel on 9/24/2017.
+ * @author  by Nabeel on 9/24/2017.
  */
+/**************************************************************************
+ * @class SecurityConfigurer @extends {@link WebSecurityConfigurerAdapter } that help to perform operation api's class for security
+ *
+ * @variable TOKEN_COOKIE : {@link String}
+ * @variable userDetailsService : {@link UserDetailsService}
+ * @variable restAuthenticationEntryPoint : {@link RestAuthenticationEntryPoint}
+ * @variable logoutSuccess : {@link LogoutSuccess}
+ * @variable tokenHelper : {@link TokenHelper}
+ *
+ * @Bean passwordEncoder() : PasswordEncoder
+ *
+ * @method configureGlobal(AuthenticationManagerBuilder auth) : void @throws {@link Exception}
+ * @method configure(HttpSecurity http) : void @throws {@link Exception }
+ * @method configure(WebSecurity http) : void @throws {@link Exception }
+ * @variable SPACE that help the {@link @method isPalindrome({@link String message}) }
+ *
+ **************************************************************************/
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -50,15 +67,39 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     TokenHelper tokenHelper;
 
+
+    /*******************************************************************************
+     * A property group for {@link SecurityConfigurer }
+     * @method passwordEncoder() : PasswordEncoder
+     *
+     * @return {@link PasswordEncoder }
+     *
+     *******************************************************************************/
     @Bean
     public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
+
+    /*****************************************************
+     * A property group for {@link SecurityConfigurer }
+     * @method configureGlobal() : void @throws {@link Exception}
+     *
+     * @param auth
+     *
+     ****************************************************/
     @Autowired
     public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
         auth.userDetailsService( userDetailsService )
                 .passwordEncoder( passwordEncoder() );
     }
 
+
+    /************************************************************************************************
+     * A property group for {@link SecurityConfigurer }
+     * @method configureGlobal(HttpSecurity http) : void @throws {@link Exception}
+     *
+     * @param http
+     *
+     *************************************************************************************************/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -76,6 +117,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
 
+    /************************************************************************
+     * A property group for {@link SecurityConfigurer }
+     * @method configureGlobal(WebSecurity web) : void @throws {@link Exception}
+     *
+     * @param web
+     *
+     *
+     *************************************************************************/
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter will ignore the below paths
